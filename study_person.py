@@ -20,7 +20,7 @@ class Person:
         "Age: " + str(self.age),
         "Birth: " + self.birth,
         "Email: " + self.email
-        #"Place: " + list(self.place)
+        #"Place: " + self.print_address_person()
         )
 
     def print_address_person(self):
@@ -31,7 +31,8 @@ class Person:
 
 person1 = Person("Pessoa 1", 45, '1990-05-23', "person1@email.com")
 #person2 = Person("Pessoa 2", 21, '2003-11-03', "person2@email.com")
-person1.add_address("Satoshi Toori", 25, "Okinawa", "Japan")
+person1.add_address("Satoshi Toori", 25, "Tokyo", "Japan")
+person1.add_address("Kokusai Toori", 123, "Okinawa", "Japan")
 
 person1.print_person()
 person1.print_address_person()
