@@ -7,7 +7,27 @@ def hello_world():
 
 @app.route('/calculator/requestparam')
 def do_calc_param():
-    operation = request.args.get("operation")
+
+    operation = str(request.args.get("operation"))
+    value1 = str(request.args.get("value1"))
+    value2 = str(request.args.get("value2"))
+
+    validator = checkParam(operation, value1, value2)
+
+    if validator == False:
+        retorno_error = {
+            "Message: " : "Preencha todos os campos da URL: operation, value1 e value2"
+        }
+        return retorno_error, 400
+
+    validator = checkData(operation, value1, value2)
+
+    if validator == False:
+        retorno_error={
+            "Message: " : "Valores incorretos, precisa ser numerios value1 e value2. Ou se divisao, value2 nao pode ser 0"
+        }
+        return retorno_error, 400
+
     value1 = int(request.args.get("value1"))
     value2 = int(request.args.get("value2"))
     
@@ -30,6 +50,7 @@ def do_calc_param():
          "ExecOK?": False,
          "TypeRequisition": "Parameter"
         }
+        return retornoJson, 400
     else: 
         resultstring = str(result)
         
@@ -58,9 +79,27 @@ def do_calc_param():
 def do_calc_body():
 
     body = request.json
+    validator = checkBody(body)
+
+    if validator == False:
+        retorno_error={
+            "Message: " : "Faltou algum campo no body: operation, value1 ou value2"
+        }
+        return retorno_error, 400
 
     # com BODY e sem LIST
     operation = body["operation"]
+    value1 = str(body["value1"])
+    value2 = str(body["value2"])
+
+    validator = checkData(operation, value1, value2)
+
+    if validator == False:
+        retorno_error={
+            "Message: " : "Valores incorretos, precisa ser numerios value1 e value2. Ou se divisao, value2 nao pode ser 0"
+        }
+        return retorno_error, 400
+
     value1 = int(body["value1"])
     value2 = int(body["value2"])
     
@@ -83,6 +122,7 @@ def do_calc_body():
          "ExecOK?": False,
          "TypeRequisition": "Body_Param"
         }
+        return retornoJson, 400
     else: 
         resultstring = str(result)
         
@@ -112,10 +152,27 @@ def do_calc_body_list():
 
     body = request.json
 
-    listparametros = body["listparameters"]
-    operation = listparametros[0]
-    value1 = listparametros[1]
-    value2 = listparametros[2]
+    try:
+        listparametros = body["listparameters"]
+        operation = str(listparametros[0])
+        value1 = str(listparametros[1])
+        value2 = str(listparametros[2])
+    except Exception as e:
+        retorno_error={
+            "Message: " : "Passe todos os parametros na LIST. Na ordem: Operation, Value1 e Value2"
+        }
+        return retorno_error, 400
+
+    validator = checkData(operation, value1, value2)
+
+    if validator == False:
+        retorno_error={
+            "Message: " : "Valores incorretos, precisa ser numerios value1 e value2. Ou se divisao, value2 nao pode ser 0"
+        }
+        return retorno_error, 400
+
+    value1 = int(listparametros[1])
+    value2 = int(listparametros[2])
     
     #match  operation: case "sum": somente PYTHON 3.10
     if operation == "sum":
@@ -136,6 +193,7 @@ def do_calc_body_list():
          "ExecOK?": False,
          "TypeRequisition": "Body_List"
         }
+        return retornoJson, 400
     else: 
         resultstring = str(result)
         
@@ -159,6 +217,27 @@ def do_calc_body_list():
     #return "2 + 2 eh: " + calculostring
     #return retornoJson
     return jsonify(retornoJson)
+
+def checkData(operator, value1, value2):
+    if value1.isnumeric() != True or value2.isnumeric() != True:
+        return False
+    else:
+        if operator == "div" and value2 == "0":
+            return False
+    return True
+    
+def checkBody(body):
+    if "operation" not in body or "value1" not in body or "value2" not in body:
+        return False
+    
+    return True
+
+def checkParam(operation, value1, value2):
+    if operation == "None" or value1 == "None" or value2 == "None":
+        return False
+    return True
+
+
     
 
 if __name__ == "__main__":
