@@ -1,4 +1,4 @@
-# python_study_linux
+# python_study_linux_ubuntu_18.04
 
 virtual box using ubuntu 18.04
 
