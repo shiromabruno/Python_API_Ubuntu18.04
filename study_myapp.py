@@ -159,11 +159,6 @@ def do_calc_body_list():
     #return "2 + 2 eh: " + calculostring
     #return retornoJson
     return jsonify(retornoJson)
-   
-
-@app.route('/cadastra/usuario', methods=["POST"])
-def insere_usuario():
-    body = request.json
     
 
 if __name__ == "__main__":
