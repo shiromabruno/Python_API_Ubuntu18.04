@@ -2,13 +2,10 @@
 
 virtual box using ubuntu 18.04
 
-sudo apt install python3-pip
-pip3 install flask
-python3
-from flask import Flask
-sudo apt install git
+via docker-compose
+![image](https://user-images.githubusercontent.com/18563229/126884950-a63a60f2-132e-489e-86e6-7fb788fd20f7.png)
 
-to run it
-export FLASK_APP=app.py
-install python3-flask
-flask run
+via flask run
+![image](https://user-images.githubusercontent.com/18563229/126885000-cd141841-3d13-4058-9be3-13795f2994a6.png)
+
+
