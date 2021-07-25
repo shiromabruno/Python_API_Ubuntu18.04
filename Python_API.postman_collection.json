@@ -1,0 +1,117 @@
+{
+	"info": {
+		"_postman_id": "b5820ca7-b40e-4540-a9e9-5e060e3f10a8",
+		"name": "Python_API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "query_parameter",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:5000/calculator/requestparam?operation=sum&value1=3&value2=5",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"calculator",
+						"requestparam"
+					],
+					"query": [
+						{
+							"key": "operation",
+							"value": "sum"
+						},
+						{
+							"key": "value1",
+							"value": "3"
+						},
+						{
+							"key": "value2",
+							"value": "5"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "request_body",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"operation\" : \"sum\",\n    \"value1\": 2,\n    \"value2\": 5\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/calculator/requestbody",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"calculator",
+						"requestbody"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "request_body_list",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"listparameters\":[\n        \"sum\",\n        2,\n        5\n    ]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/calculator/requestbody/list",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"calculator",
+						"requestbody",
+						"list"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

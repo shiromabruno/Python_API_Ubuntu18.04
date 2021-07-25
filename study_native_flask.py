@@ -242,4 +242,4 @@ def checkParam(operation, value1, value2):
 
 if __name__ == "__main__":
     #app.run()
-    app.run(debug=True)
+    app.run(host='0.0.0.0', debug=True)
